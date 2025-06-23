@@ -1,0 +1,145 @@
+@media (max-width: 1480px) {
+	.components-wrap {
+		flex-wrap: wrap;
+	}
+	.components-wrap * {
+	    box-sizing: border-box;
+	}
+	.enhancements {
+		flex-basis: 100%;
+	}
+	.components-wrap__inner {
+		width: 100%;
+		flex-direction: row;
+    	align-items: flex-start;
+    	height: 234px;
+	}
+	.boosters {
+		margin-top: 0;
+		flex-basis: 560px;
+		flex-shrink: 0;
+	}
+	.info {
+		flex-grow: 1;
+		height: 100%;
+	}
+	.drops-info {
+		flex-basis: 50%;
+	}
+	.list-wrap {
+	    display: flex;
+	    justify-content: space-between;
+	    margin-top: 15px;
+	    gap: 10px;
+	}
+	.list-wrap * {
+	    box-sizing: border-box;
+	}
+	.item-list {
+		max-width: 480px;
+		float: left;
+    	margin-top: 0;
+    	height: 236px;
+    	align-content: baseline;
+    	overflow: hidden;
+    	overflow-y: auto;
+    	min-width: 245px;
+    	min-height: 258px;
+    	flex-grow: 1;
+	}
+	.result-wrap {
+		margin-top: 0;
+		flex-basis: 905px;
+	    gap: 10px;
+	    height: 258px;
+	}
+	.result-data {
+		min-width: 400px;
+	}
+}
+
+@media (max-width: 1200px) {
+	.body {
+		display: flex;
+	    flex-direction: column;
+	}
+	.components-wrap {
+		flex-wrap: nowrap;
+		margin-top: 15px;
+		order: 2;
+	}
+	.components-wrap__inner {
+		flex-direction: row;
+        width: auto;
+		height: auto;
+	}
+    .enhancements {
+        flex-basis: auto;
+        flex-grow: 1;
+        flex-shrink: unset;
+        margin-top: 0;
+        min-height: 558px;
+        align-content: baseline;
+    }
+	.boosters {
+		align-content: baseline;
+        flex-basis: auto;
+        width: 234px;
+        height: 100%;
+	}
+	.info {
+		flex-direction: column;
+        width: 260px;
+        height: 100%;
+	}
+	.info-item {
+		flex-grow: unset;
+	}
+	.drops-info {
+		flex-basis: auto;
+		flex-grow: 1;
+	}
+	.list-wrap {
+		flex-direction: column;
+		order: 1;
+    	gap: 15px;
+	}
+	.item-list {
+		height: auto;
+        width: 100%;
+        max-width: unset;
+        flex-grow: unset;
+        height: 122px;
+        min-height: unset;
+	}
+	.result-wrap {
+		flex-basis: auto;
+        height: auto;
+	}
+}
+
+@media (max-width: 940px) {
+	.interface-button {
+		font-size: 12px;
+	    line-height: 14px;
+	    padding: 12px 16px;
+	}
+	.result-wrap {
+		flex-direction: column;
+	}
+	.components-wrap {
+		max-height: 445px;
+	}
+	.enhancements {
+		min-height: unset;
+        overflow-y: auto;
+        height: 100%;
+	}
+	.boosters {
+		width: 140px;
+		overflow-y: auto;
+	}
+	.list-item.disabled {
+		display: none;
+	}
+}

@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		let infoText = '';
 		const effects = item.groupDamageValues ? item.groupDamageValues() : item.effects;
 		Object.keys(effects).forEach(key => {
-			infoText += `<div class="info-item-text"><b>${camelToSpaces(key)}:</b> ${effects[key]}</div>`
+			infoText += `<div class="info-item-text"><b>${capitalize(camelToSpaces(key))}:</b> ${effects[key]}</div>`
 		});
 
 		let dropsInfo = '';
@@ -490,7 +490,7 @@ function updateData() {
 		itemElement.item.inventory.draw();
 
 		Object.keys(calculated).forEach(key => {
-			dataHtml += `<div class="result-data-item">${key}: ${calculated[key]}</div>`
+			dataHtml += `<div class="result-data-item">${capitalize(camelToSpaces(key))}: ${calculated[key]}</div>`
 		});
 
 		resultData.innerHTML = dataHtml;
