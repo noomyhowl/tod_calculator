@@ -1,0 +1,55 @@
+<!-- TODO: -->
+<!--
+	- Add delete button for an existing item (enhancement);
+	- Add filters for components by type, by element and by alphabet (default);
+	- Replace console.warn with a proper error messages;
+	- ???
+	- Profit
+-->
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Throne of Darkness calculator</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<script defer src="js/Enhancer.js"></script>
+		<script defer src="js/Booster.js"></script>
+		<script defer src="js/Enhancement.js"></script>
+		<script defer src="js/Inventory.js"></script>
+		<script defer src="js/DropGroup.js"></script>
+		<script defer src="js/Monster.js"></script>
+		<script defer src="js/MonsterList.js"></script>
+		<script defer src="js/ToD_calculator.js"></script>
+		<link href="css/style.css" rel="stylesheet">
+	</head>
+
+	<body>
+		<div class="body" id="body">
+			<div class="interface">
+				<input class="interface-input item-name" placeholder="name">
+				<input class="interface-input slots-amount" placeholder="slots" type="number" min="0" max="32">
+				<div class="interface-button create-weapon">Create Weapon</div>
+				<div class="interface-button create-armor">Create Armor</div>
+			</div>
+			<div class="components-wrap">
+				<div class="enhancements list"></div>
+				<div class="components-wrap__inner">
+					<div class="boosters list"></div>
+					<div class="info"></div>
+				</div>
+			</div>
+
+			<div class="item-list"></div>
+			
+			<div class="result-wrap">
+				<div class="inventory">
+
+				</div>
+				<div class="result-list" style="display:none"></div>
+				<div class="result-data"></div>
+			</div>
+
+		</div>
+	</body>
+</html>
