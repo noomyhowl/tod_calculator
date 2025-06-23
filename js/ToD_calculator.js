@@ -10,12 +10,12 @@ function camelToSpaces(str) {
 	const letters = str.split('');
 	let word = '';
 	for (let i = 0; i < letters.length; i++) {
-	    if (letters[i] === letters[i].toLowerCase()) {
-	        word += letters[i];
-	    } else {
-	        words.push(word);
-	        word = letters[i];
-	    }
+		if (letters[i] === letters[i].toLowerCase()) {
+			word += letters[i];
+		} else {
+			words.push(word);
+			word = letters[i];
+		}
 	}
 	words.push(word);
 	return words.join(' ');
@@ -23,7 +23,7 @@ function camelToSpaces(str) {
 
 function capitalize(str) {
 	words = str.split(' ');
-    result = [];
+	result = [];
 	words.forEach(word => {
 		result.push(word[0].toUpperCase() + word.substring(1, word.length))
 	})
@@ -70,7 +70,7 @@ const data_Enhancers = {
 	patienceOfBuddha: new Enhancer('Patience of Buddha', 'earth', [1,1], 'armor', { earthResistance: 25 }, 20, ['Blessed'], ['of Buddha'], 'icons/comp_patienceofbuddha.png', true),
 	purpleEgg: new Enhancer('Purple Kappa Egg', 'earth', [2,2], 'weapon', { pushback: 15 }, 24, ['Suigetsu', 'Suizan'], ['of Suigetsu', 'of Suizan'], 'icons/comp_purplekappaegg.png'),
 	scorpionStinger: new Enhancer('Scorpion Dragon Stinger', 'earth', [1,2], 'weapon', { poison: 1 }, 8, ['Spider', 'Centipede', 'Scorpion'], ['of the Kumo', 'of the Mukade', 'of the Sasori'], 'icons/comp_scorpiondragonstinger.png'),
-	stoneBamboo: new Enhancer('stoneBamboo', 'earth', [1,3], 'any', { indestructible: 1 }, 18, ['Tiger', 'Dragon', 'Demon'], ['of the Tora', 'of the Ryu', 'of the Oni'], 'icons/comb_stonebamboo.png', true),
+	stoneBamboo: new Enhancer('Stone Bamboo', 'earth', [1,3], 'any', { indestructible: 1 }, 18, ['Tiger', 'Dragon', 'Demon'], ['of the Tora', 'of the Ryu', 'of the Oni'], 'icons/comb_stonebamboo.png', true),
 	tessaikiTeeth: new Enhancer('Tessa-iki\'s Teeth', 'earth', [2,2], 'weapon', { indestructible: 1 }, 18, ['Tiger', 'Dragon', 'Demon'], ['of the Tora', 'of the Ryu', 'of the Oni'], 'icons/comp_teeth.png', true),
 
 	// lightning
@@ -112,6 +112,77 @@ document.addEventListener('DOMContentLoaded', () => {
 	const resultList = document.querySelector('.result-list');
 	const resultData = document.querySelector('.result-data');
 	const infoWrap = document.querySelector('.info');
+	const menu = document.querySelector('.menu-window');
+	const menuButtonComponents = document.querySelector('.menu-button-components');
+	const menuButtonGems = document.querySelector('.menu-button-gems');
+
+	const openMenu = (gems = false) => {
+		menu.classList.add('active');
+		if (gems) {
+			menuButtonGems.classList.add('active');
+			menuButtonComponents.classList.remove('active');
+			boostersList.classList.add('active');
+			enhancementsList.classList.remove('active');
+		} else {
+			menuButtonComponents.classList.add('active');
+			menuButtonGems.classList.remove('active');
+			enhancementsList.classList.add('active');
+			boostersList.classList.remove('active');
+		}
+	}
+
+	const closeMenu = () => {
+		setTimeout(() => {
+			if (!menu.hovered && !menuButtonGems.hovered && !menuButtonComponents.hovered) {
+				menuButtonComponents.classList.remove('active');
+				menuButtonGems.classList.remove('active');
+				menu.classList.remove('active');
+			}
+		}, 0)
+	}
+
+	const menuOpened = () => { return menu.classList.contains('active') }
+
+	menuButtonComponents.addEventListener('click', () => {
+		if (window.innerWidth <= 450)
+			if (menuOpened())
+				closeMenu()
+			else
+				openMenu(false)
+	});
+	menuButtonGems.addEventListener('click', () => {
+		if (window.innerWidth <= 450) {
+			if (menuOpened())
+				closeMenu()
+			else
+				openMenu(true)
+		}
+	});
+
+	menu.addEventListener('mouseover', () => {
+		menu.hovered = true;
+	});
+	menu.addEventListener('mouseleave', () => {
+		menu.hovered = false;
+		closeMenu();
+	})
+	menuButtonComponents.addEventListener('mouseover', () => {
+		menuButtonComponents.hovered = true;
+		openMenu();
+	});
+	menuButtonComponents.addEventListener('mouseleave', () => {
+		menuButtonComponents.hovered = false;
+		closeMenu();
+	});
+
+	menuButtonGems.addEventListener('mouseover', () => {
+		menuButtonGems.hovered = true;
+		openMenu(true);
+	});
+	menuButtonGems.addEventListener('mouseleave', () => {
+		menuButtonGems.hovered = false;
+		closeMenu();
+	});
 
 	const appendEnhancerInfo = function (item) {
 		let infoText = '';
@@ -181,7 +252,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			}
 
 		item.innerText = data_Enhancers[key].name;
-		item.addEventListener('click', () => {
+		item.addEventListener('mouseover', () => {
 			if (item.classList.contains('disabled')) return;
 			const activeItem = document.querySelector('.list-item.active');
 			if (activeItem)
@@ -225,7 +296,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			item.style.background = `#000 url(${data_Boosters[key].iconPath}) no-repeat center /  ${50 * data_Boosters[key].slots[0]}px ${50 * data_Boosters[key].slots[1]}px`;
 
 		item.innerText = data_Boosters[key].name;
-		item.addEventListener('click', () => {
+		item.addEventListener('mouseover', () => {
 			const activeItem = document.querySelector('.list-item.active');
 			if (activeItem)
 				activeItem.classList.remove('active')
@@ -248,6 +319,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	createWeaponButton.addEventListener('click', () => {
 		if (slotsAmountInput.value && itemNameInput.value) {
+			document.querySelector('.tooltip').style.display = 'none';
 			itemList.style.display = "flex";
 			const item = new Enhancement('weapon', slotsAmountInput.value, itemNameInput.value);
 			slotsAmountInput.value = '';
@@ -282,6 +354,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	createArmorButton.addEventListener('click', () => {
 		if (slotsAmountInput.value && itemNameInput.value) {
+			document.querySelector('.tooltip').style.display = 'none';
 			itemList.style.display = "flex";
 			const item = new Enhancement('armor', slotsAmountInput.value, itemNameInput.value);
 			slotsAmountInput.value = '';

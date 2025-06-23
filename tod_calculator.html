@@ -22,7 +22,7 @@
 		<script defer src="js/MonsterList.js"></script>
 		<script defer src="js/ToD_calculator.js"></script>
 		<link href="css/style.css" rel="stylesheet">
-		<link href="css/adaptive.css" rel="stylesheet">
+		<!--link href="css/adaptive.css" rel="stylesheet"-->
 	</head>
 
 	<body>
@@ -32,10 +32,10 @@
 				<input class="interface-input slots-amount" placeholder="slots" type="number" min="0" max="32">
 				<div class="interface-button create-weapon">Create Weapon</div>
 				<div class="interface-button create-armor">Create Armor</div>
-			</div>
-			<div class="components-wrap">
-				<div class="enhancements list"></div>
-				<div class="components-wrap__inner">
+				<div class="menu-button menu-button-components">Components</div>
+				<div class="menu-button menu-button-gems">Gems</div>
+				<div class="menu-window">
+					<div class="enhancements list"></div>
 					<div class="boosters list"></div>
 					<div class="info"></div>
 				</div>
@@ -51,7 +51,11 @@
 					<div class="result-data"></div>
 				</div>
 			</div>
-
+			<div class="tooltip">
+			    <p>To begin, enter a template name and slots amount.</p>
+			    <p>Then press "Create Weapon" or "Create Armor".</p>
+			    <p>Then add available components and gems from menu.</p>
+			</div>
 		</div>
 	</body>
 </html>
