@@ -8,6 +8,10 @@ function Enhancement (type = "weapon", slots = 1, name = "", fillers = []) {
 
 	// add component to an item
 	this.addFiller = (filler) => {
+		if (filler.unique && this.inventory.items.find(item => { return item.itemObject.name === filler.name })) {
+			console.warn('Filler', filler.name, 'is unique and was already added to the enhancement!');
+			return
+		}
 		if (filler.availableTarget === "any" || this.type === filler.availableTarget) {
 			if (this.inventory.addItem({ width: filler.slots[0], height: filler.slots[1], itemObject: filler })) {
 				return true

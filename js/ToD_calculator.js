@@ -33,44 +33,57 @@ function capitalize(str) {
 // (I did not included unique items that can not be obtained via multiplayer game)
 // Enhancers:
 const data_Enhancers = {
+
+	// water
 	blueShard: new Enhancer('Blue Soul Shard', 'water', [1,1], 'armor', { health: 5 }, 1, ['Boar', 'Wolf', 'Bear'], ['of the Inoshishi', 'of the Ookami', 'of the Kuma'], 'icons/comp_bluesoulsharp.png'),
-	chogokinOre: new Enhancer('Cho-Gokin Ore', 'lightning', [2,2], 'armor',  { armor: 10 }, 8, ['Masterpiece', 'Handa', 'Gennai'], ['of the Meisaku', 'of Handa', 'of Gennai'], 'icons/comp_chogokinore.png'),
-	coral: new Enhancer('Coral', 'fire', [2,2], 'weapon', { fire_min_damage: 1, fire_max_damage: 3, water_min_damage: 1, water_max_damage: 3 }, 8, ['Blaze', 'Phoenix', 'Amaterasu'], ['of the Honou', 'of the Houtou', 'of Amaterasu'], 'icons/comp_coral.png'),
-	debuMeat: new Enhancer('Debu Blubber', 'earth', [2,2], 'weapon', { durability: 5, strength: 5, pushback: 10, lifesteal: 5 }, 12, ['Confusion', 'Knockout', 'Containment'], ['of Konran', 'of Atemi', 'of Fusegi'], 'icons/comp_debublubber.png'),
 	kappaShell: new Enhancer('Elder Kappa Shell', 'water', [2,3], 'armor', { durability: 10,  armor: 10, fireResistance: 5, waterResistance: 10, lightningResistance: -10 }, 16, ['Shark', 'Orca', 'Whale'], ['of the Wani', 'of the Shachi', 'of the Kujira'], 'icons/comp_kappashell.png'),
-
-	oniHorn: new Enhancer('Forest Oni Horn', 'lightning', [2,1], 'weapon', { lightning_min_damage: 2, lightning_max_damage: 5 }, 6, ['Yukimutsu', 'Kuniyoshi', 'Muramase'], ['of the Yukimitsu', 'of the Kuniyoshi', 'of the Muramase'], 'icons/comp_forestonihorn.png'),
-	oniIchor: new Enhancer('Forest Oni Ichor', 'earth', [2,2], 'armor', { fireResistance: 5, earthResistance: 5 }, 8, ['Asp', 'Viper', 'Tsuchinoko'], ['of the Habu', 'of the Mamushi', 'of the Tsuchinoko'], 'icons/comp_forestoniichor.png'),
-	gakiBones: new Enhancer('Gaki Bones', 'lightning', [1,1], 'armor', { durability: 2, armor: 3 }, 2, ['Lightning', 'Thunderclap'], ['of the Ikazuchi', 'of the Raimei'], 'icons/comp_gakibones.png'),
-	ghostArmor: new Enhancer('Ghost Armor Plates', 'lightning', [2,3], 'armor', { durability: 5, armor: 15 }, 12, ['Ultimate', 'Immortal', 'Invincible'], ['of the Saikyo', 'of the Fujimi', 'of the Muteki'], 'icons/comp_ghostarmorplates.png'),
 	goldShard: new Enhancer('Gold Soul Shard', 'water', [1,1], 'any', { gold: 15 }, 1, ['Hotei', 'Daikoku', 'Benten'], ['of Hotei', 'of Daikoku', 'of Benten'], 'icons/comp_goldensoulsharp.png'),
-
-	greenShard: new Enhancer('Green Soul Shard', 'earth', [1,1], 'weapon', { earth_min_damage: 1, earth_max_damage: 3 }, 1, ['Volcano', 'Stone Spirit', 'Dokuniniushi'], ['of the Kazan', 'of the Ganseki', 'of Dokuniniushi'], 'icons/comp_greensoulsharp.png'),
-	dragonHead: new Enhancer('Guardian Dragon Head', 'fire', [2,2], 'weapon', { fire_min_damage: 2, fire_max_damage: 5, lightning_min_damage: 2, lightning_max_damage: 5 }, 12, ['Inferno', 'Fire Serpent', 'Himiko'], ['of the Saiga', 'of the Enjya', 'of Himiko'], 'icons/comp_guardiandragonhead.png'),
-	dragonSkin: new Enhancer('Guardian Dragon Skin', 'lightning', [2,2], 'armor', { reflection: 5, indestructible: 1 }, 20, ['Copper', 'Platinum', 'Gold'], ['of the Dou', 'of the Ghin', 'of the Kin'], 'icons/comp_guardiandargonskin.png'),
-	dragonWing: new Enhancer('Guardian Dragon Wing', 'earth', [2,2], 'armor', { fireResistance: 10, waterResistance: -5, lightningResistance: 10 }, 8, ['Sage', 'Buddha', 'Kannon'], ['of the Sennin', 'of Hotoke', 'of Kannon'], 'icons/comp_guardiandragonwing.png'),
 	hairpin: new Enhancer('Hairpin', 'water', [1,2], 'weapon', { lifesteal: 5 }, 6, ['Spider', 'Centipede', 'Scorpion'], ['of the Kumo', 'of the Mukade', 'of the Sasori'], 'icons/comp_hairpin.png'),
-
-	jade: new Enhancer('Jade', 'earth', [1,2], 'armor', { reflection: 3 }, 3, ['Yamma', 'Orochi', 'Yammabushi'], ['San', 'of Orochi', 'of Yammabushi'], 'icons/comp_jade.png'),
-	kappaBlood: new Enhancer('Kappa Blood', 'fire', [2,2], 'any', { strength: 5, vitality: 5 }, 8, ['Red', 'Otokodate', 'Kachikachi-yamma'], ['of Blood', 'of the Otokodate', 'of Kachikachi-yamma'], 'icons/comp_kappablood.png'),
 	kappaClaw: new Enhancer('Kappa Claw', 'water', [1,3], 'weapon', { strength: 5, pushback: 5 }, 8, ['Yasha', 'Shoki', 'Jinmen'], ['of Yasha', 'of Shoki', 'of Jinmen'], 'icons/comp_kappaclaw.png'),
-	magmaSphere: new Enhancer('Magma Sphere', 'fire', [1,1], 'weapon', { fire_min_damage: 1, fire_max_damage: 10, earth_min_damage: 1, earth_max_damage: 10 }, 24, ['Fire Storm', 'Inferno', 'Meteor'], ['of the Hannya', 'of the Tsuina', 'of Sarugaku'], 'icons/comp_magmaspere.png'),
-	oniBones: new Enhancer('Oni Bones', 'earth', [1,2], 'any', { durability: 5, vitality: 5 }, 6, ['Ta-ke', 'Sakura', 'Matsu'], ['of the Ta-ke', 'of the Sakura', 'of the Matsu'], 'icons/comp_onibones.png'),
-
-	oniClaw: new Enhancer('Oni Claw', 'earth', [2,1], 'weapon', { strength: 5, earth_min_damage: 1, earth_max_damage: 5 }, 6, ['Tiger', 'Dragon', 'Demon'], ['of the Tora', 'of the Ryu', 'of the Oni'], 'icons/comp_oniclaw.png'),
 	oniFangs: new Enhancer('Oni Fangs', 'water', [1,2], 'weapon', { lifesteal: 5 }, 6, ['Blood Drinker', 'Revival', 'Regeneration'], ['of the Kyuketsuki', 'of Kaifuku', 'of Kyusei'], 'icons/comp_onifang.png'),
 	pearl: new Enhancer('Pearl', 'water', [2,2], 'weapon', { freeze: 8 }, 8, ['Storm', 'Tsunami', 'Susano-o'], ['of the Arashi', 'of the Tsunami', 'of Susano-o'], 'icons/comp_pearl.png'),
-	purpleEgg: new Enhancer('Purple Kappa Egg', 'earth', [2,2], 'weapon', { pushback: 15 }, 24, ['Suigetsu', 'Suizan'], ['of Suigetsu', 'of Suizan'], 'icons/comp_purplekappaegg.png'),
-	purpleShard: new Enhancer('Purple Soul Shard', 'lightning', [1,1], 'weapon', { weaponary: 5 }, 1, ['Quick Strike', 'Death Strike', 'Unyou'], ['of Hayawaza', 'of Hitsatsuwaza', 'of Unyou'], 'icons/comp_purplesoulsharp.png'),
-
 	redEgg: new Enhancer('Red Kappa Egg', 'water', [2,2], 'weapon', { freeze: 50 }, 24, ['Suigetsu', 'Suizan'], ['of Suigetsu', 'of Suizan'], 'icons/comp_redkappaegg.png'),
-	redShard: new Enhancer('Red Soul Shard', 'fire', [1,1], 'armor', { mana: 5 }, 1, ['Eclipse', 'Comet', 'Constellation'], ['of the Gesshoku', 'of the Suisei', 'of the Seiza'], 'icons/comp_redsoulsharp.png'),
-	scorpionStinger: new Enhancer('Scorpion Dragon Stinger', 'earth', [1,2], 'weapon', { poison: 1 }, 8, ['Spider', 'Centipede', 'Scorpion'], ['of the Kumo', 'of the Mukade', 'of the Sasori'], 'icons/comp_scorpiondragonstinger.png'),
-	spiderweb: new Enhancer('Spider Witch Cobwebs', 'lightning', [1,2], 'armor', { reflection: 5, durability: 3 }, 8, ['Tensai', 'Shikome', 'Tsuchigumo'], ['of the Tensai', 'of the Shikome', 'of Tsuchigumo'], 'icons/comp_spiderwitchcobweb.png'),
-	tenguFeathers: new Enhancer('Tengu Feathers', 'lightning', [1,2], 'any', { dexterity: 5 }, 6, ['Dragonfly', 'Falcon', 'Tengu'], ['of the Tombo', 'of the Hayabusa', 'of the Tengu'], 'icons/comp_tengufeathers.png'),
+	suigetsuShell: new Enhancer('Suigetsu Shell', 'water', [2,3], 'armor', { waterResistance: 15, strength: 25, vitality: 10, pushback: 10 }, 24, ['Snow', 'Blizzard', 'Glacier'], ['of Yuki', 'of the Fubuki', 'of the Hyoga'], 'icons/comp_kappashell.png', true),
+	tearOfBuddha: new Enhancer('Tear of Buddha', 'water', [1,1], 'armor', { waterResistance: 25 }, 20, ['Blessed'], ['of Buddha'], 'icons/comp_tearofbuddha.png', true),
+	yamainuPelt: new Enhancer('Yama-inu Pelt', 'water', [2,2], 'armor', { armor: 5, waterResistance: 5, earthResistance: 5 }, 8, ['Snow', 'Blizzard', 'Glacier'], ['of Yuki', 'of the Fubuki', 'of the Hyoga'], 'icons/comp_yamainupelt.png'),
 
+	// fire
+	bloodOfBuddha: new Enhancer('Blood of Buddha', 'fire', [1,1], 'armor', { fireResistance: 25 }, 20, ['Blessed'], ['of Buddha'], 'icons/comp_bloodofbuddah.png', true),
+	coral: new Enhancer('Coral', 'fire', [2,2], 'weapon', { fire_min_damage: 1, fire_max_damage: 3, water_min_damage: 1, water_max_damage: 3 }, 8, ['Blaze', 'Phoenix', 'Amaterasu'], ['of the Honou', 'of the Houtou', 'of Amaterasu'], 'icons/comp_coral.png'),
+	dragonHead: new Enhancer('Guardian Dragon Head', 'fire', [2,2], 'weapon', { fire_min_damage: 2, fire_max_damage: 5, lightning_min_damage: 2, lightning_max_damage: 5 }, 12, ['Inferno', 'Fire Serpent', 'Himiko'], ['of the Saiga', 'of the Enjya', 'of Himiko'], 'icons/comp_guardiandragonhead.png'),
+	kappaBlood: new Enhancer('Kappa Blood', 'fire', [2,2], 'any', { strength: 5, vitality: 5 }, 8, ['Red', 'Otokodate', 'Kachikachi-yamma'], ['of Blood', 'of the Otokodate', 'of Kachikachi-yamma'], 'icons/comp_kappablood.png'),
+	magmaSphere: new Enhancer('Magma Sphere', 'fire', [1,1], 'weapon', { fire_min_damage: 1, fire_max_damage: 10, earth_min_damage: 1, earth_max_damage: 10 }, 24, ['Fire Storm', 'Inferno', 'Meteor'], ['of the Hannya', 'of the Tsuina', 'of Sarugaku'], 'icons/comp_magmaspere.png'),
+	redShard: new Enhancer('Red Soul Shard', 'fire', [1,1], 'armor', { mana: 5 }, 1, ['Eclipse', 'Comet', 'Constellation'], ['of the Gesshoku', 'of the Suisei', 'of the Seiza'], 'icons/comp_redsoulsharp.png'),
+	serpentScales: new Enhancer('Serpent Scales', 'fire', [1,2], 'armor', { fireResistance: 10, earthResistance: 10, waterResistance: 10, lightningResistance: 10 }, 12, ['Inferno', 'Fire Serpent', 'Himiko'], ['of the Saiga', 'of the Enjya', 'of Himiko'], 'icons/comp_wingedserpeantscales.png', true),
 	yamainuBlood: new Enhancer('Yama-inu Blood', 'fire', [2,2], 'any', { ki: 5, manasteal: 5 }, 10, ['Soul Drinker', 'Supernatural', 'Mononoke'], ['of the Kyukonki', 'of the Youki', 'of the Mononoke'], 'icons/comp_yama-inu_blood.png'),
-	yamainuPelt: new Enhancer('Yama-inu Pelt', 'water', [2,2], 'armor', { armor: 5, waterResistance: 5, earthResistance: 5 }, 8, ['Snow', 'Blizzard', 'Glacier'], ['of Yuki', 'of the Fubuki', 'of the Hyoga'], 'icons/comp_yamainupelt.png')
+
+	// earth
+	debuMeat: new Enhancer('Debu Blubber', 'earth', [2,2], 'weapon', { durability: 5, strength: 5, pushback: 10, lifesteal: 5 }, 12, ['Confusion', 'Knockout', 'Containment'], ['of Konran', 'of Atemi', 'of Fusegi'], 'icons/comp_debublubber.png'),
+	dragonParts: new Enhancer('Dragon Parts', 'earth', [2,3], 'weapon', { damage: 10, earth_min_damage: 5, earth_max_damage: 10, lightning_min_damage: 5, lightning_min_damage: 10 }, 20, [], [], 'icons/comp_dragonparts.png', true),
+	oniIchor: new Enhancer('Forest Oni Ichor', 'earth', [2,2], 'armor', { fireResistance: 5, earthResistance: 5 }, 8, ['Asp', 'Viper', 'Tsuchinoko'], ['of the Habu', 'of the Mamushi', 'of the Tsuchinoko'], 'icons/comp_forestoniichor.png'),
+	greenShard: new Enhancer('Green Soul Shard', 'earth', [1,1], 'weapon', { earth_min_damage: 1, earth_max_damage: 3 }, 1, ['Volcano', 'Stone Spirit', 'Dokuniniushi'], ['of the Kazan', 'of the Ganseki', 'of Dokuniniushi'], 'icons/comp_greensoulsharp.png'),
+	dragonWing: new Enhancer('Guardian Dragon Wing', 'earth', [2,2], 'armor', { fireResistance: 10, waterResistance: -5, lightningResistance: 10 }, 8, ['Sage', 'Buddha', 'Kannon'], ['of the Sennin', 'of Hotoke', 'of Kannon'], 'icons/comp_guardiandragonwing.png'),
+	hemp: new Enhancer('Hemp', 'earth', [1,2], 'any', { indestructible: 1 }, 18, ['Indestructible'], ['of Katabira'], 'icons/comp_hemp.png', true),
+	jade: new Enhancer('Jade', 'earth', [1,2], 'armor', { reflection: 3 }, 3, ['Yamma', 'Orochi', 'Yammabushi'], ['San', 'of Orochi', 'of Yammabushi'], 'icons/comp_jade.png'),
+	oniBones: new Enhancer('Oni Bones', 'earth', [1,2], 'any', { durability: 5, vitality: 5 }, 6, ['Ta-ke', 'Sakura', 'Matsu'], ['of the Ta-ke', 'of the Sakura', 'of the Matsu'], 'icons/comp_onibones.png'),
+	oniClaw: new Enhancer('Oni Claw', 'earth', [2,1], 'weapon', { strength: 5, earth_min_damage: 1, earth_max_damage: 5 }, 6, ['Tiger', 'Dragon', 'Demon'], ['of the Tora', 'of the Ryu', 'of the Oni'], 'icons/comp_oniclaw.png'),
+	patienceOfBuddha: new Enhancer('Patience of Buddha', 'earth', [1,1], 'armor', { earthResistance: 25 }, 20, ['Blessed'], ['of Buddha'], 'icons/comp_patienceofbuddha.png', true),
+	purpleEgg: new Enhancer('Purple Kappa Egg', 'earth', [2,2], 'weapon', { pushback: 15 }, 24, ['Suigetsu', 'Suizan'], ['of Suigetsu', 'of Suizan'], 'icons/comp_purplekappaegg.png'),
+	scorpionStinger: new Enhancer('Scorpion Dragon Stinger', 'earth', [1,2], 'weapon', { poison: 1 }, 8, ['Spider', 'Centipede', 'Scorpion'], ['of the Kumo', 'of the Mukade', 'of the Sasori'], 'icons/comp_scorpiondragonstinger.png'),
+	stoneBamboo: new Enhancer('stoneBamboo', 'earth', [1,3], 'any', { indestructible: 1 }, 18, ['Tiger', 'Dragon', 'Demon'], ['of the Tora', 'of the Ryu', 'of the Oni'], 'icons/comb_stonebamboo.png', true),
+	tessaikiTeeth: new Enhancer('Tessa-iki\'s Teeth', 'earth', [2,2], 'weapon', { indestructible: 1 }, 18, ['Tiger', 'Dragon', 'Demon'], ['of the Tora', 'of the Ryu', 'of the Oni'], 'icons/comp_teeth.png', true),
+
+	// lightning
+	chogokinOre: new Enhancer('Cho-Gokin Ore', 'lightning', [2,2], 'armor',  { armor: 10 }, 8, ['Masterpiece', 'Handa', 'Gennai'], ['of the Meisaku', 'of Handa', 'of Gennai'], 'icons/comp_chogokinore.png'),
+	oniHorn: new Enhancer('Forest Oni Horn', 'lightning', [2,1], 'weapon', { lightning_min_damage: 2, lightning_max_damage: 5 }, 6, ['Yukimutsu', 'Kuniyoshi', 'Muramase'], ['of the Yukimitsu', 'of the Kuniyoshi', 'of the Muramase'], 'icons/comp_forestonihorn.png'),
+	gakiBones: new Enhancer('Gaki Bones', 'lightning', [1,1], 'armor', { durability: 2, armor: 3 }, 2, ['Lightning', 'Thunderclap'], ['of the Ikazuchi', 'of the Raimei'], 'icons/comp_gakibones.png'),
+	ghostArmor: new Enhancer('Ghost Armor Plates', 'lightning', [2,3], 'armor', { durability: 5, armor: 15 }, 12, ['Ultimate', 'Immortal', 'Invincible'], ['of the Saikyo', 'of the Fujimi', 'of the Muteki'], 'icons/comp_ghostarmorplates.png'),
+	dragonSkin: new Enhancer('Guardian Dragon Skin', 'lightning', [2,2], 'armor', { reflection: 5, indestructible: 1 }, 20, ['Copper', 'Platinum', 'Gold'], ['of the Dou', 'of the Ghin', 'of the Kin'], 'icons/comp_guardiandargonskin.png'),
+	purpleShard: new Enhancer('Purple Soul Shard', 'lightning', [1,1], 'weapon', { weaponary: 5 }, 1, ['Quick Strike', 'Death Strike', 'Unyou'], ['of Hayawaza', 'of Hitsatsuwaza', 'of Unyou'], 'icons/comp_purplesoulsharp.png'),
+	soulOfBuddha: new Enhancer('Soul of Buddha', 'lightning', [1,1], 'armor', { lightningResistance: 25 }, 20, ['Blessed'], ['of Buddha'], 'icons/comp_spulofbuddha.png', true),
+	spiderweb: new Enhancer('Spider Witch Cobwebs', 'lightning', [1,2], 'armor', { reflection: 5, durability: 3 }, 8, ['Tensai', 'Shikome', 'Tsuchigumo'], ['of the Tensai', 'of the Shikome', 'of Tsuchigumo'], 'icons/comp_spiderwitchcobweb.png'),
+	tenguFeathers: new Enhancer('Tengu Feathers', 'lightning', [1,2], 'any', { dexterity: 5 }, 6, ['Dragonfly', 'Falcon', 'Tengu'], ['of the Tombo', 'of the Hayabusa', 'of the Tengu'], 'icons/comp_tengufeathers.png')
+
 }
 
 // Boosters:
@@ -108,10 +121,14 @@ document.addEventListener('DOMContentLoaded', () => {
 		});
 
 		let dropsInfo = '';
-		let drops = gg_monsters.findDrops(item.name);
-		drops.forEach(drop => {
-			dropsInfo += `<div class="drop-item">${drop.name}: <b>${drop.chance}%</b></div>`
-		});
+		if (item.unique) {
+			dropsInfo = `<div class="drop-item">Unique</b></div>`
+		} else {
+			let drops = gg_monsters.findDrops(item.name);
+			drops.forEach(drop => {
+				dropsInfo += `<div class="drop-item">${drop.name}: <b>${drop.chance}%</b></div>`
+			});
+		}
 
 
 		infoWrap.innerHTML = `
@@ -324,10 +341,18 @@ function initMonsters() {
 	]), 25);
 	monsters.addMonster(monster);
 
+	// Evil Priest
+	monster = new Monster('Evil Priest', 20);
+	monster.secondDrops.addDropGroup(new DropGroup('Component', 20, [
+		{ item: data_Enhancers.jade, chance: 30}, 
+		{ item: data_Enhancers.blueShard, chance: 20 }, 
+		{ item: data_Enhancers.redShard, chance: 30 }, 
+		{ item: data_Enhancers.goldShard, chance: 20 }, 
+	]), 20);
+	monsters.addMonster(monster);
+
 	// Dead Foot Solider
-	// Notice that all the other undead soldiers are having the same drops, i guess.
-	// Yet I was too lazy to double check all of those items and their drop-rates...
-	monster = new Monster('Dead Foot Solider', 10);
+	monster = new Monster('Dead Foot Soldier', 10);
 	monster.secondDrops.addDropGroup(new DropGroup('Component', 2, [
 		{ item: data_Enhancers.blueShard, chance: 5}, 
 		{ item: data_Enhancers.purpleShard, chance: 20 }, 
@@ -335,6 +360,130 @@ function initMonsters() {
 		{ item: data_Enhancers.chogokinOre, chance: 20 }, 
 		{ item: data_Enhancers.goldShard, chance: 10 }, 
 		{ item: data_Enhancers.coral, chance: 20 }, 
+		{ item: data_Enhancers.pearl, chance: 10 }, 
+		{ item: data_Enhancers.greenShard, chance: 10 }, 
+	]), 2);
+	monsters.addMonster(monster);
+
+	// Fallen Hero Foot Soldier
+	monster = new Monster('Fallen Hero Foot Soldier', 10);
+	monster.secondDrops.addDropGroup(new DropGroup('Component', 10, [
+		{ item: data_Enhancers.blueShard, chance: 5}, 
+		{ item: data_Enhancers.purpleShard, chance: 25 }, 
+		{ item: data_Enhancers.redShard, chance: 5 }, 
+		{ item: data_Enhancers.chogokinOre, chance: 20 }, 
+		{ item: data_Enhancers.goldShard, chance: 10 }, 
+		{ item: data_Enhancers.coral, chance: 25 }, 
+		{ item: data_Enhancers.pearl, chance: 5 }, 
+		{ item: data_Enhancers.greenShard, chance: 5 }, 
+	]), 10);
+	monster.secondDrops.addDrop('Gem', 1);
+	monsters.addMonster(monster);
+
+	// Kihei
+	monster = new Monster('Kihei', 10);
+	monster.secondDrops.addDropGroup(new DropGroup('Component', 10, [
+		{ item: data_Enhancers.blueShard, chance: 5}, 
+		{ item: data_Enhancers.purpleShard, chance: 25 }, 
+		{ item: data_Enhancers.redShard, chance: 5 }, 
+		{ item: data_Enhancers.chogokinOre, chance: 20 }, 
+		{ item: data_Enhancers.goldShard, chance: 10 }, 
+		{ item: data_Enhancers.coral, chance: 25 }, 
+		{ item: data_Enhancers.pearl, chance: 5 }, 
+		{ item: data_Enhancers.greenShard, chance: 5 }, 
+	]), 10);
+	monster.secondDrops.addDrop('Gem', 5);
+	monsters.addMonster(monster);
+
+	// Fallen Ninja
+	monster = new Monster('Fallen Ninja', 10);
+	monster.secondDrops.addDropGroup(new DropGroup('Component', 10, [
+		{ item: data_Enhancers.goldShard, chance: 70 },
+		{ item: data_Enhancers.greenShard, chance: 30 }, 
+	]), 10);
+	monster.secondDrops.addDrop('Gem', 5);
+	monsters.addMonster(monster);
+
+	// Fallen Wizard
+	monster = new Monster('Fallen Wizard', 10);
+	monster.firstDrops.addDropGroup(new DropGroup('Component', 25, [
+		{ item: data_Enhancers.blueShard, chance: 20}, 
+		{ item: data_Enhancers.redShard, chance: 30 }, 
+		{ item: data_Enhancers.goldShard, chance: 20 },
+		{ item: data_Enhancers.jade, chance: 30 },
+	]), 25);
+	monster.firstDrops.addDrop('Gem', 5);
+	monster.secondDrops.addDropGroup(new DropGroup('Component', 10, [
+		{ item: data_Enhancers.blueShard, chance: 20}, 
+		{ item: data_Enhancers.redShard, chance: 30 }, 
+		{ item: data_Enhancers.goldShard, chance: 20 },
+		{ item: data_Enhancers.jade, chance: 30 },
+	]), 10);
+	monsters.addMonster(monster);
+
+	// Dead Foot Solider
+	monster = new Monster('Dead Foot Soldier', 10);
+	monster.secondDrops.addDropGroup(new DropGroup('Component', 2, [
+		{ item: data_Enhancers.blueShard, chance: 5}, 
+		{ item: data_Enhancers.purpleShard, chance: 20 }, 
+		{ item: data_Enhancers.redShard, chance: 5 }, 
+		{ item: data_Enhancers.chogokinOre, chance: 20 }, 
+		{ item: data_Enhancers.goldShard, chance: 10 }, 
+		{ item: data_Enhancers.coral, chance: 20 }, 
+		{ item: data_Enhancers.pearl, chance: 10 }, 
+		{ item: data_Enhancers.greenShard, chance: 10 }, 
+	]), 2);
+	monsters.addMonster(monster);
+
+	// Shadow Commander
+	monster = new Monster('Shadow Commander', 10);
+	monster.secondDrops.addDropGroup(new DropGroup('Component', 2, [
+		{ item: data_Enhancers.blueShard, chance: 10}, 
+		{ item: data_Enhancers.purpleShard, chance: 20 }, 
+		{ item: data_Enhancers.redShard, chance: 10 }, 
+		{ item: data_Enhancers.chogokinOre, chance: 20 }, 
+		{ item: data_Enhancers.goldShard, chance: 10 }, 
+		{ item: data_Enhancers.coral, chance: 10 }, 
+		{ item: data_Enhancers.pearl, chance: 10 }, 
+		{ item: data_Enhancers.greenShard, chance: 10 }, 
+	]), 2);
+	monsters.addMonster(monster);
+
+	// Shadow Soldier
+	monster = new Monster('Shadow Soldier', 10);
+	monster.secondDrops.addDropGroup(new DropGroup('Component', 10, [
+		{ item: data_Enhancers.blueShard, chance: 5}, 
+		{ item: data_Enhancers.purpleShard, chance: 20 }, 
+		{ item: data_Enhancers.redShard, chance: 5 }, 
+		{ item: data_Enhancers.chogokinOre, chance: 20 }, 
+		{ item: data_Enhancers.goldShard, chance: 10 }, 
+		{ item: data_Enhancers.coral, chance: 20 }, 
+		{ item: data_Enhancers.pearl, chance: 10 }, 
+		{ item: data_Enhancers.greenShard, chance: 10 }, 
+	]), 10);
+	monsters.addMonster(monster);
+
+	// Skeleton Archer
+	monster = new Monster('Skeleton Archer', 10);
+	monster.secondDrops.addDropGroup(new DropGroup('Component', 5, [
+		{ item: data_Enhancers.blueShard, chance: 5}, 
+		{ item: data_Enhancers.purpleShard, chance: 20 }, 
+		{ item: data_Enhancers.redShard, chance: 5 }, 
+		{ item: data_Enhancers.chogokinOre, chance: 20 }, 
+		{ item: data_Enhancers.goldShard, chance: 10 }, 
+		{ item: data_Enhancers.coral, chance: 20 }, 
+		{ item: data_Enhancers.pearl, chance: 10 }, 
+		{ item: data_Enhancers.greenShard, chance: 10 }, 
+	]), 5);
+	monsters.addMonster(monster);
+
+	// Neanderskull
+	monster = new Monster('Neanderskull', 10);
+	monster.secondDrops.addDropGroup(new DropGroup('Component', 2, [
+		{ item: data_Enhancers.purpleShard, chance: 30 }, 
+		{ item: data_Enhancers.chogokinOre, chance: 30 }, 
+		{ item: data_Enhancers.goldShard, chance: 10 }, 
+		{ item: data_Enhancers.coral, chance: 10 }, 
 		{ item: data_Enhancers.pearl, chance: 10 }, 
 		{ item: data_Enhancers.greenShard, chance: 10 }, 
 	]), 2);
@@ -368,13 +517,13 @@ function initMonsters() {
 
 	// Evil Priestess
 	monster = new Monster('Evil Priestess', 1);
-	monster.secondDrops.addDropGroup(new DropGroup('Component', 1, [
+	monster.secondDrops.addDropGroup(new DropGroup('Component', 69, [
 		{ item: data_Enhancers.blueShard, chance: 10 }, 
 		{ item: data_Enhancers.redShard, chance: 10 }, 
 		{ item: data_Enhancers.hairpin, chance: 45 }, 
 		{ item: data_Enhancers.jade, chance: 10 }, 
 		{ item: data_Enhancers.pearl, chance: 25 }, 
-	]), 1);
+	]), 69);
 	monsters.addMonster(monster);
 
 	// Gaki
