@@ -30,6 +30,10 @@ function capitalize(str) {
 	return result.join(' ');
 }
 
+let gg_cellWidth = 60;
+let gg_cellHeight = 60;
+let gg_cellGap = 2;
+
 // (I did not included unique items that can not be obtained via multiplayer game)
 // Enhancers:
 const data_Enhancers = {
@@ -115,6 +119,46 @@ document.addEventListener('DOMContentLoaded', () => {
 	const menu = document.querySelector('.menu-window');
 	const menuButtonComponents = document.querySelector('.menu-button-components');
 	const menuButtonGems = document.querySelector('.menu-button-gems');
+	const menuSwitch = document.querySelector('.menu-switch');
+
+	const updateVariables = () => {
+		let redraw = false;
+		const width = window.innerWidth;
+		console.log('width:', width);
+
+		if (width <= 450) {
+			if (gg_cellWidth !== 25) {
+				gg_cellWidth = 25;
+				gg_cellHeight = 25;
+				redraw = true;
+			}
+		} else if (width <= 550) {
+			if (gg_cellWidth !== 40) {
+				gg_cellWidth = 40;
+				gg_cellHeight = 40;
+				redraw = true;
+			}
+		} else {
+			if (gg_cellWidth !== 60) {
+				gg_cellWidth = 60;
+				gg_cellHeight = 60;
+				redraw = true;
+			}
+		}
+
+		if (redraw) {
+			const targetItem = document.querySelector('.result-list-item.active');
+			if (targetItem) {
+				targetItem.item.inventory.refresh();
+			}
+		}
+	}
+
+	updateVariables();
+
+	window.addEventListener('resize', () => {
+		updateVariables()
+	})
 
 	const openMenu = (gems = false) => {
 		menu.classList.add('active');
@@ -142,6 +186,14 @@ document.addEventListener('DOMContentLoaded', () => {
 	}
 
 	const menuOpened = () => { return menu.classList.contains('active') }
+
+	menuSwitch.addEventListener('click', () => {
+		if (menuSwitch.classList.contains('active')) {
+			menuSwitch.classList.remove('active')
+		} else {
+			menuSwitch.classList.add('active')
+		}
+	});
 
 	menuButtonComponents.addEventListener('click', () => {
 		if (window.innerWidth <= 450)
@@ -262,31 +314,27 @@ document.addEventListener('DOMContentLoaded', () => {
 			appendEnhancerInfo(data_Enhancers[key]);
 		});
 
-		setTimeout(() => {
-			const itemButton = createChild(item, 'list-item-button');
-			itemButton.addEventListener('click', () => {
-				if (itemButton.parentElement.classList.contains('disabled')) return;
-				const targetItem = document.querySelector('.result-list-item.active');
-				if (targetItem) {
-					targetItem.item.addFiller(data_Enhancers[key]);
-					updateData();
-				}
-			});
-
-
-			let itemLabel;
-			let type = data_Enhancers[key].availableTarget;
-			if (type === 'armor') {
-				itemLabel = createChild(item, 'item-label-armor');
-			} else if (type === 'weapon') {
-				itemLabel = createChild(item, 'item-label-weapon');
-			} else {
-				itemLabel = createChild(item, 'item-label-any');
+		item.addEventListener('click', () => {
+			if (item.classList.contains('disabled')) return;
+			const targetItem = document.querySelector('.result-list-item.active');
+			if (targetItem) {
+				targetItem.item.addFiller(data_Enhancers[key]);
+				updateData();
 			}
-			itemLabel.innerText = type;
-			itemLabel.classList.add('js_item_label');
+		});
 
-		}, 0);
+
+		let itemLabel;
+		let type = data_Enhancers[key].availableTarget;
+		if (type === 'armor') {
+			itemLabel = createChild(item, 'item-label-armor');
+		} else if (type === 'weapon') {
+			itemLabel = createChild(item, 'item-label-weapon');
+		} else {
+			itemLabel = createChild(item, 'item-label-any');
+		}
+		itemLabel.innerText = type;
+		itemLabel.classList.add('js_item_label');
 		
 	});
 
@@ -304,17 +352,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
 			appendBoosterInfo(data_Boosters[key]);
 		});
-
-		setTimeout(() => {
-			const itemButton = createChild(item, 'list-item-button');
-			itemButton.addEventListener('click', () => {
-				const targetItem = document.querySelector('.result-list-item.active');
-				if (targetItem) {
-					targetItem.item.addFiller(data_Boosters[key]);
-					updateData();
-				}
-			});
-		}, 0);
+		item.addEventListener('click', () => {
+			const targetItem = document.querySelector('.result-list-item.active');
+			if (targetItem) {
+				console.log('targetItem.item:', targetItem.item);
+				targetItem.item.addFiller(data_Boosters[key]);
+				updateData();
+			}
+		});
 	});
 
 	createWeaponButton.addEventListener('click', () => {
@@ -706,7 +751,7 @@ function updateData() {
 
 		itemElement.slots.innerText = `${itemElement.item.activeSlots()} / ${itemElement.item.maxSlots}`;
 
-		let dataHtml = `<div class="result-data-title">Expected name: ${itemElement.item.getFullName()}</div>`;
+		let dataHtml = `<div class="result-data-title">Expected name: <br class="br-1024">${itemElement.item.getFullName()}</div>`;
 		let calculated = itemElement.item.calculateResult();
 
 		itemElement.item.inventory.draw();

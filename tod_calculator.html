@@ -1,12 +1,3 @@
-<!-- TODO: -->
-<!--
-	- Add delete button for an existing item (enhancement);
-	- Add filters for components by type, by element and by alphabet (default);
-	- Replace console.warn with a proper error messages;
-	- ???
-	- Profit
--->
-
 <!DOCTYPE html>
 <html>
 	<head>
@@ -22,22 +13,29 @@
 		<script defer src="js/MonsterList.js"></script>
 		<script defer src="js/ToD_calculator.js"></script>
 		<link href="css/style.css" rel="stylesheet">
-		<!--link href="css/adaptive.css" rel="stylesheet"-->
+		<link href="css/adaptive.css" rel="stylesheet">
 	</head>
 
 	<body>
 		<div class="body" id="body">
 			<div class="interface">
-				<input class="interface-input item-name" placeholder="name">
-				<input class="interface-input slots-amount" placeholder="slots" type="number" min="0" max="32">
-				<div class="interface-button create-weapon">Create Weapon</div>
-				<div class="interface-button create-armor">Create Armor</div>
-				<div class="menu-button menu-button-components">Components</div>
-				<div class="menu-button menu-button-gems">Gems</div>
-				<div class="menu-window">
-					<div class="enhancements list"></div>
-					<div class="boosters list"></div>
-					<div class="info"></div>
+				<div class="input-wrap">
+					<input class="interface-input item-name" placeholder="name">
+					<input class="interface-input slots-amount" placeholder="slots" type="number" min="0" max="32">
+				</div>
+				<div class="button-wrap">
+					<div class="interface-button create-weapon">Create Weapon</div>
+					<div class="interface-button create-armor">Create Armor</div>
+				</div>
+				<div class="menu-wrap">
+					<div class="menu-button menu-button-components">Components</div>
+					<div class="menu-button menu-button-gems">Gems</div>
+					<div class="menu-switch">Hide disabled components</div>
+					<div class="menu-window">
+						<div class="enhancements list"></div>
+						<div class="boosters list"></div>
+						<div class="info"></div>
+					</div>
 				</div>
 			</div>
 
@@ -52,9 +50,9 @@
 				</div>
 			</div>
 			<div class="tooltip">
-			    <p>To begin, enter a template name and slots amount.</p>
-			    <p>Then press "Create Weapon" or "Create Armor".</p>
-			    <p>Then add available components and gems from menu.</p>
+				<p>To begin, enter a&nbsp;template&nbsp;name and&nbsp;slots&nbsp;amount.</p>
+				<p>Then press "Create&nbsp;Weapon" or&nbsp;"Create&nbsp;Armor".</p>
+				<p>Then add available components and&nbsp;gems from&nbsp;the&nbsp;menu.</p>
 			</div>
 		</div>
 	</body>

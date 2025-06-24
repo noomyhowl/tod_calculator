@@ -41,19 +41,19 @@ function Inventory (width, height, parent) {
 
 		// 2a. sort array
 		this.items.sort((itemA, itemB) => {
-		    if (itemA.width > itemB.width) {
-		        return -1
-		    } else if (itemA.width < itemB.width) {
-		        return 1
-		    } else {
-		        if (itemA.height > itemB.height) {
-		            return -1
-		        } else if (itemA.height < itemB.height) {
-		            return 1
-		        } else {
-		            return 0
-		        }
-		    }
+			if (itemA.width > itemB.width) {
+				return -1
+			} else if (itemA.width < itemB.width) {
+				return 1
+			} else {
+				if (itemA.height > itemB.height) {
+					return -1
+				} else if (itemA.height < itemB.height) {
+					return 1
+				} else {
+					return 0
+				}
+			}
 		});
 
 
@@ -85,19 +85,19 @@ function Inventory (width, height, parent) {
 	this.refresh = () => {
 		// 1a. sort array
 		this.items.sort((itemA, itemB) => {
-		    if (itemA.width > itemB.width) {
-		        return -1
-		    } else if (itemA.width < itemB.width) {
-		        return 1
-		    } else {
-		        if (itemA.height > itemB.height) {
-		            return -1
-		        } else if (itemA.height < itemB.height) {
-		            return 1
-		        } else {
-		            return 0
-		        }
-		    }
+			if (itemA.width > itemB.width) {
+				return -1
+			} else if (itemA.width < itemB.width) {
+				return 1
+			} else {
+				if (itemA.height > itemB.height) {
+					return -1
+				} else if (itemA.height < itemB.height) {
+					return 1
+				} else {
+					return 0
+				}
+			}
 		});
 
 
@@ -150,8 +150,9 @@ function Inventory (width, height, parent) {
 	this.draw = () => {
 		let container = document.querySelector('.inventory');
 		container.innerHTML = '';
-		container.style.width = `${this.width * 60 + 2}px`;
-		container.style.height = `${this.height * 60 + 2}px`;
+		console.log('width:', this.width, 'cellWidth:', gg_cellWidth, 'gap:', gg_cellGap, 'result:', (this.width * gg_cellWidth + gg_cellGap));
+		container.style.width = `${this.width * gg_cellWidth + gg_cellGap}px`;
+		container.style.height = `${this.height * gg_cellHeight + gg_cellGap}px`;
 		for (let i = 0; i < this.cells.length; i++) {
 			this.cells[i].el = createChild(container, 'inventory-cell');
 			this.cells[i].el.style.order = this.cells[i].order;
@@ -161,10 +162,10 @@ function Inventory (width, height, parent) {
 		}
 		this.items.forEach(item => {
 			item.el = createChild(container, 'inventory-item');
-			item.el.style.left = `${item.x * 60}px`;
-			item.el.style.top = `${item.y * 60}px`;
-			item.el.style.width = `${item.width * 60}px`;
-			item.el.style.height = `${item.height * 60}px`;
+			item.el.style.left = `${item.x * gg_cellWidth}px`;
+			item.el.style.top = `${item.y * gg_cellHeight}px`;
+			item.el.style.width = `${item.width * gg_cellWidth}px`;
+			item.el.style.height = `${item.height * gg_cellHeight}px`;
 			item.el.style.background = `#000 url(${item.itemObject.iconPath}) no-repeat center / contain`;
 			item.el.innerText = item.itemObject.name;
 			item.deleteButton = createChild(item.el, 'close-button');
