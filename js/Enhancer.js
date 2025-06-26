@@ -1,4 +1,5 @@
 // Main enhancing components
+let enhancer_id_counter = 0;
 function Enhancer (name, element, slots, availableTarget = "any", effects = {}, magicValue = 1, prefix = [], suffix = [], iconPath = "", unique = false) {
 	this.name = name;
 	this.element = element;
@@ -11,6 +12,7 @@ function Enhancer (name, element, slots, availableTarget = "any", effects = {}, 
 	this.prefix = prefix;
 	this.magicValue = magicValue;
 	this.unique = unique;
+	this.id = enhancer_id_counter ++;
 
 	this.addEffect = (name, value) => {
 		this.effects[name] = value;

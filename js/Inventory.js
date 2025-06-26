@@ -150,7 +150,6 @@ function Inventory (width, height, parent) {
 	this.draw = () => {
 		let container = document.querySelector('.inventory');
 		container.innerHTML = '';
-		console.log('width:', this.width, 'cellWidth:', gg_cellWidth, 'gap:', gg_cellGap, 'result:', (this.width * gg_cellWidth + gg_cellGap));
 		container.style.width = `${this.width * gg_cellWidth + gg_cellGap}px`;
 		container.style.height = `${this.height * gg_cellHeight + gg_cellGap}px`;
 		for (let i = 0; i < this.cells.length; i++) {

@@ -5,6 +5,23 @@ function createChild(parent, className) {
 	return result;
 }
 
+function setStorage(key, value) {
+	try {
+		localStorage.setItem(key, value)
+	} catch (ex) {
+		console.warn("local storage is not supported")
+	}
+}
+
+function getStorage(key) {
+	try {
+		return localStorage.getItem(key)
+	} catch (ex) {
+		console.warn("local storage is not supported")
+	}
+	return undefined
+}
+
 function camelToSpaces(str) {
 	const words = [];
 	const letters = str.split('');
@@ -25,7 +42,8 @@ function capitalize(str) {
 	words = str.split(' ');
 	result = [];
 	words.forEach(word => {
-		result.push(word[0].toUpperCase() + word.substring(1, word.length))
+		if (word.length)
+			result.push(word[0].toUpperCase() + word.substring(1, word.length))
 	})
 	return result.join(' ');
 }
@@ -124,7 +142,6 @@ document.addEventListener('DOMContentLoaded', () => {
 	const updateVariables = () => {
 		let redraw = false;
 		const width = window.innerWidth;
-		console.log('width:', width);
 
 		if (width <= 450) {
 			if (gg_cellWidth !== 25) {
@@ -319,6 +336,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			const targetItem = document.querySelector('.result-list-item.active');
 			if (targetItem) {
 				targetItem.item.addFiller(data_Enhancers[key]);
+				updateSavedItem(targetItem.item);
 				updateData();
 			}
 		});
@@ -355,8 +373,8 @@ document.addEventListener('DOMContentLoaded', () => {
 		item.addEventListener('click', () => {
 			const targetItem = document.querySelector('.result-list-item.active');
 			if (targetItem) {
-				console.log('targetItem.item:', targetItem.item);
 				targetItem.item.addFiller(data_Boosters[key]);
+				updateSavedItem(targetItem.item);
 				updateData();
 			}
 		});
@@ -365,32 +383,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	createWeaponButton.addEventListener('click', () => {
 		if (slotsAmountInput.value && itemNameInput.value) {
 			document.querySelector('.tooltip').style.display = 'none';
-			itemList.style.display = "flex";
-			const item = new Enhancement('weapon', slotsAmountInput.value, itemNameInput.value);
-			slotsAmountInput.value = '';
-			itemNameInput.value = '';
-			items.push(item);
-			const itemElement = createChild(itemList, 'result-list-item');
-			itemElement.addEventListener('click', () => {
-				const activeItem = document.querySelector('.result-list-item.active');
-				if (activeItem)
-					activeItem.classList.remove('active')
-				itemElement.classList.add('active');
-				disableComponents('armor');
-				updateData();
-			});
-			itemElement.item = item;
-
-			setTimeout(() => {
-				itemElement.name = createChild(itemElement, 'result-item-name');
-				itemElement.slots = createChild(itemElement, 'item-slots');
-				itemLabel = createChild(itemElement, 'item-label-weapon');
-				itemLabel.innerText = item.type;
-				itemElement.name.innerText = item.name;
-				itemElement.slots.innerText = `${item.activeSlots()} / ${item.maxSlots}`;
-
-				itemElement.click();
-			}, 0);
+			createItem('weapon', slotsAmountInput.value, itemNameInput.value);
 
 		} else {
 			console.warn('Inputs for Slots and Name must be filled')
@@ -400,32 +393,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	createArmorButton.addEventListener('click', () => {
 		if (slotsAmountInput.value && itemNameInput.value) {
 			document.querySelector('.tooltip').style.display = 'none';
-			itemList.style.display = "flex";
-			const item = new Enhancement('armor', slotsAmountInput.value, itemNameInput.value);
-			slotsAmountInput.value = '';
-			itemNameInput.value = '';
-			items.push(item);
-			const itemElement = createChild(itemList, 'result-list-item');
-			itemElement.addEventListener('click', () => {
-				const activeItem = document.querySelector('.result-list-item.active');
-				if (activeItem)
-					activeItem.classList.remove('active')
-				itemElement.classList.add('active');
-				disableComponents('weapon');
-				updateData();
-			});
-			itemElement.item = item;
-
-			setTimeout(() => {
-				itemElement.name = createChild(itemElement, 'result-item-name');
-				itemElement.slots = createChild(itemElement, 'item-slots');
-				itemLabel = createChild(itemElement, 'item-label-armor');
-				itemLabel.innerText = item.type;
-				itemElement.name.innerText = item.name;
-				itemElement.slots.innerText = `${item.activeSlots()} / ${item.maxSlots}`;
-
-				itemElement.click();
-			}, 0);
+			createItem('armor', slotsAmountInput.value, itemNameInput.value);
 
 		} else {
 			console.warn('Inputs for Slots and Name must be filled')
@@ -743,6 +711,146 @@ function initMonsters() {
 	return monsters;
 }
 
+let gg_storaged = loadStorage();
+function loadStorage() {
+	const loaded = [];
+	let lastId = 0;
+	Object.keys(localStorage).forEach(key => {
+		const loadedItem = localStorage[key];
+		loadedItem.id = key;
+		lastId = key;
+		loaded.push(loadedItem);
+	})
+
+	result = [];
+	if (loaded.length)
+		loaded.forEach(loadedItemData => result.push(createLoadedItem(loadedItemData)))
+
+	return {
+		enhancements: result,
+		data: loaded
+	}
+}
+
+function updateSavedItem(enhancement) {
+	localStorage.removeItem(enhancement.id);
+	saveItem(enhancement);
+}
+
+function saveItem(enhancement) {
+	const mappedInventory = enhancement.inventory.items.map(item => item.itemObject);
+	const boosters = mappedInventory.filter(item => item.type === 'booster').map(item => item.id);
+	const enhancers = mappedInventory.filter(item => item.type === 'enhancer').map(item => item.id);
+	let result = `${enhancement.type},${enhancement.maxSlots},${enhancement.name},${enhancement.id};${enhancers.join(',')};${boosters.join(',')}`;
+	setStorage(enhancement.id, result);
+	return result
+}
+
+function findEnhancerById(id) {
+	let result = undefined;
+	if (id === '') return result;
+	Object.keys(data_Enhancers).forEach(key => {
+		if (data_Enhancers[key].id == id)
+			result = data_Enhancers[key]
+	})
+	return result
+}
+function findBoosterById(id) {
+	let result = undefined;
+	if (id === '') return result;
+	Object.keys(data_Boosters).forEach(key => {
+		if (data_Boosters[key].id == id)
+			result = data_Boosters[key]
+	})
+	return result
+}
+
+function getNewEnhancementId() {
+	let result = 0;
+	gg_storaged.enhancements.forEach(item => {
+		if (item.id >= result)
+			result = +item.id + 1
+	})
+	return result
+}
+
+function createItem(type, slots, name, fillers = [], id = getNewEnhancementId(), loaded = false) {
+	const itemList = document.querySelector('.item-list');
+	const slotsAmountInput = document.querySelector('.slots-amount');
+	const itemNameInput = document.querySelector('.item-name');
+	const resultData = document.querySelector('.result-data');
+	document.querySelector('.tooltip').style.display = 'none';
+	itemList.style.display = "flex";
+	const item = new Enhancement(type, slots, name, fillers, id);
+	slotsAmountInput.value = '';
+	itemNameInput.value = '';
+	const itemElement = createChild(itemList, 'result-list-item');
+	itemElement.addEventListener('click', () => {
+		const activeItem = document.querySelector('.result-list-item.active');
+		if (activeItem)
+			activeItem.classList.remove('active')
+		itemElement.classList.add('active');
+		if (type === 'armor')
+			disableComponents('weapon');
+		else 
+			disableComponents('armor');
+		updateData();
+	});
+	itemElement.item = item;
+
+	setTimeout(() => {
+		itemElement.name = createChild(itemElement, 'result-item-name');
+		itemElement.slots = createChild(itemElement, 'item-slots');
+		if (type === 'armor')
+			itemLabel = createChild(itemElement, 'item-label-armor');
+		else 
+			itemLabel = createChild(itemElement, 'item-label-weapon');
+		itemLabel.innerText = item.type;
+		itemElement.name.innerText = item.name;
+		itemElement.slots.innerText = `${item.activeSlots()} / ${item.maxSlots}`;
+
+		itemDeleteButton = createChild(itemElement, 'item-delete-button');
+		itemDeleteButton.addEventListener('click', () => {
+			deleteEnhancementItem(itemElement)
+		});
+
+		itemElement.click();
+	}, 0);
+
+	if (!loaded)
+		gg_storaged.enhancements.push(item)
+	return item
+}
+
+function deleteEnhancementItem(itemElement) {
+	const targetIndex = gg_storaged.enhancements.findIndex(item => +item.id === +itemElement.item.id)
+	if (targetIndex >= 0) {
+		localStorage.removeItem(itemElement.item.id)
+		itemElement.remove();
+		return true
+	}
+	return false
+}
+
+function createLoadedItem(loadedData) {
+	const loadedDataSplit = loadedData.split(';');
+	const enhancementData = loadedDataSplit[0].split(',');
+	const enhancerData = loadedDataSplit[1].split(',');
+	const boosterData = loadedDataSplit[2].split(',');
+	enhancement = createItem(enhancementData[0], enhancementData[1], enhancementData[2], [], enhancementData[3], true);
+	enhancerData.forEach(item => {
+		const filler = findEnhancerById(item);
+		if (filler)
+			enhancement.addFiller(filler)
+	})
+	boosterData.forEach(item => {
+		const filler = findBoosterById(item);
+		if (filler)
+			enhancement.addFiller(filler)
+	})
+	return enhancement
+}
+
 function updateData() {
 	document.querySelector('.result-wrap').style.display = "flex";
 	const itemElement = document.querySelector('.result-list-item.active');
@@ -750,16 +858,13 @@ function updateData() {
 		const resultData = document.querySelector('.result-data');
 
 		itemElement.slots.innerText = `${itemElement.item.activeSlots()} / ${itemElement.item.maxSlots}`;
-
 		let dataHtml = `<div class="result-data-title">Expected name: <br class="br-1024">${itemElement.item.getFullName()}</div>`;
 		let calculated = itemElement.item.calculateResult();
 
 		itemElement.item.inventory.draw();
-
 		Object.keys(calculated).forEach(key => {
 			dataHtml += `<div class="result-data-item">${capitalize(camelToSpaces(key))}: ${calculated[key]}</div>`
 		});
-
 		resultData.innerHTML = dataHtml;
 	}
 }

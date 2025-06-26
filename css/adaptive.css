@@ -134,6 +134,11 @@
 		box-sizing: border-box;
 		justify-content: space-between;
 	}
+	.item-delete-button {
+		top: 4px;
+		right: 115px;
+		z-index: 1;
+	}
 	.result-item-name {
 		font-size: 14px;
 		line-height: 14px;

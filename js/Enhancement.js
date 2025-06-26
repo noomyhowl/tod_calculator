@@ -1,10 +1,11 @@
 // Basically, an item that will be enhanced
-function Enhancement (type = "weapon", slots = 1, name = "", fillers = []) {
+function Enhancement (type = "weapon", slots = 1, name = "", fillers = [], id = 0) {
 	this.type = type;
 	this.name = name;
 	this.maxSlots = slots > 32 ? 32 : slots;
 	this.inventory = new Inventory(8, 4, this);
 	this.inventory.lockCells(32 - slots);
+	this.id = id;
 
 	// add component to an item
 	this.addFiller = (filler) => {
